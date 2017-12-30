@@ -24,7 +24,7 @@ scheduler.every '50s' do
   tweet = "New post in r/CryptoCurrency: #{newest_post["title"]} + https://www.reddit.com/#{newest_post["permalink"]} #cryptocurrency"
 
   if newest_post["id"] != last_post["id"]
-    # client.update(tweet)
+    client.update(tweet)
     puts "#{count}: I tweeted!!!!!!!!! + #{newest_post["title"]}"
   end
 

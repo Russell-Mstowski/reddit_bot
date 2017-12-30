@@ -10,6 +10,7 @@ client = Twitter::REST::Client.new do |config|
 end
 
 scheduler = Rufus::Scheduler.new
+refresher = Rufus::Scheduler.new
 
 last_post = {:id => ""}
 count = 0
@@ -20,15 +21,20 @@ scheduler.every '50s' do
 
   newest_post = posts.first["data"]
 
-  tweet = "New post in r/CryptoCurrency: #{newest_post["title"]} + https://www.reddit.com/#{newest_post["permalink"]} #crypto"
+  tweet = "New post in r/CryptoCurrency: #{newest_post["title"]} + https://www.reddit.com/#{newest_post["permalink"]} #cryptocurrency"
 
   if newest_post["id"] != last_post["id"]
-    client.update(tweet)
+    # client.update(tweet)
     puts "#{count}: I tweeted!!!!!!!!! + #{newest_post["title"]}"
   end
 
   last_post = newest_post
   count += 1
+end
+
+refresher.every '5m' do
+  Unirest.get('https://redditcryptobot.herokuapp.com')
+  puts "refreshed!!"
 end
 
 

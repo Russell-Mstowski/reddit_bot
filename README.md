@@ -2,7 +2,7 @@
 
 This is a twitter bot that tweets every time someone posts in the r/CryptoCurrency subreddit. 
 
-(http://redditcryptobot.herokuapp.com/) - [@rCryptoBot](https://twitter.com/rCryptoBot)
+http://redditcryptobot.herokuapp.com/ - [@rCryptoBot](https://twitter.com/rCryptoBot)
 
 Built with:
 

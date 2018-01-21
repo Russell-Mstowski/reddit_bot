@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a twitter bot that tweets every time someone posts in the r/CryptoCurrency subreddit. [@rCryptoBot](https://twitter.com/rCryptoBot)
 
-Things you may want to cover:
+Built with:
 
-* Ruby version
+- Ruby on Rails
 
-* System dependencies
+- Reddit Api
 
-* Configuration
+- Twitter Api
 
-* Database creation
+- Rufus-Scheduler
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Deployed on Heroku

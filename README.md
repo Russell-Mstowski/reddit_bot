@@ -1,6 +1,8 @@
 # README
 
-This is a twitter bot that tweets every time someone posts in the r/CryptoCurrency subreddit. [@rCryptoBot](https://twitter.com/rCryptoBot)
+This is a twitter bot that tweets every time someone posts in the r/CryptoCurrency subreddit. 
+
+[@rCryptoBot](https://twitter.com/rCryptoBot)
 
 Built with:
 

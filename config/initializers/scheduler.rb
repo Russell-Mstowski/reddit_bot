@@ -21,7 +21,7 @@ scheduler.every '25s' do
 
   newest_post = posts.first["data"]
 
-  tweet = "New post in r/CryptoCurrency: #{newest_post["title"]} + https://www.reddit.com#{newest_post["permalink"]} #cryptocurrency"
+  tweet = "[NEW POST]: #{newest_post["title"]} + https://www.reddit.com#{newest_post["permalink"]} #cryptocurrency #crypto"
 
   if newest_post["id"] != last_post["id"]
     client.update(tweet)

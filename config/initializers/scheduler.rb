@@ -14,7 +14,7 @@ refresher = Rufus::Scheduler.new
 
 last_post = {:id => ""}
 count = 0
-scheduler.every '4h' do
+scheduler.every '25s' do
   response = Unirest.get("https://www.reddit.com/r/CryptoCurrency/hot/.json")
 
   posts = response.body["data"]["children"]
@@ -36,6 +36,3 @@ refresher.every '10m' do
   Unirest.get('https://redditcryptobot.herokuapp.com')
   puts "refreshed!!"
 end
-
-
-

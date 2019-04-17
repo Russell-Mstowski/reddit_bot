@@ -19,7 +19,7 @@ scheduler.every '4h' do
 
   posts = response.body["data"]["children"]
 
-  newest_post = posts.first["data"]
+  newest_post = posts.shuffle.first["data"]
 
   tweet = "[NEW]: #{newest_post["title"]} + https://www.reddit.com#{newest_post["permalink"]} #cryptocurrency #crypto #blockchain"
 

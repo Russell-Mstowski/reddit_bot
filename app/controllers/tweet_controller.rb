@@ -16,5 +16,8 @@ class TweetController < ApplicationController
         tweet = "#{newest_post["title"]} + https://www.reddit.com#{newest_post["permalink"]} #cryptocurrency #crypto #blockchain"
         
         client.update(tweet)
+
+        redirect_to '/'
+        return
     end
 end

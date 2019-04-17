@@ -14,14 +14,14 @@ refresher = Rufus::Scheduler.new
 
 last_post = {:id => ""}
 count = 0
-scheduler.every '4h' do
+scheduler.every '1h' do
   response = Unirest.get("https://www.reddit.com/r/CryptoCurrency/hot/.json")
 
   posts = response.body["data"]["children"]
 
   newest_post = posts.shuffle.first["data"]
 
-  tweet = "[NEW]: #{newest_post["title"]} + https://www.reddit.com#{newest_post["permalink"]} #cryptocurrency #crypto #blockchain"
+  tweet = "#{newest_post["title"]} + https://www.reddit.com#{newest_post["permalink"]} #cryptocurrency #crypto #blockchain"
 
   if newest_post["id"] != last_post["id"]
     client.update(tweet)

@@ -14,7 +14,7 @@ refresher = Rufus::Scheduler.new
 
 last_post = {:id => ""}
 count = 0
-scheduler.every '25s' do
+scheduler.every '4h' do
   response = Unirest.get("https://www.reddit.com/r/CryptoCurrency/hot/.json")
 
   posts = response.body["data"]["children"]

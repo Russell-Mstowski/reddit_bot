@@ -18,7 +18,7 @@ scheduler.every '30s' do
 
   posts = response.body["data"]["children"]
 
-  posts.delete_if { |post| post["title"].include? 'Daily Discussion' }
+  posts.delete_if { |post| post["data"]["title"].include? 'Daily Discussion' }
 
   newest_post = posts.shuffle.first["data"]
 

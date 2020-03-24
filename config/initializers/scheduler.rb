@@ -13,12 +13,12 @@ scheduler = Rufus::Scheduler.new
 refresher = Rufus::Scheduler.new
 
 last_post = {:id => ""}
-scheduler.every '1h' do
+scheduler.every '5m' do
   response = Unirest.get("https://www.reddit.com/r/CryptoCurrency/hot/.json")
 
   posts = response.body["data"]["children"]
 
-  posts.delete_if {|post| post["title"].includes? 'Daily Discussion' }
+  posts.delete_if { |post| post["title"].include? 'Daily Discussion' }
 
   newest_post = posts.shuffle.first["data"]
 

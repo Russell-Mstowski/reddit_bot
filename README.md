@@ -1,6 +1,6 @@
 # README
 
-This is a twitter bot that tweets every time someone posts in the r/CryptoCurrency subreddit. 
+This is a twitter bot that pulls posts from the r/CryptoCurrency subreddit and tweets every hour.
 
 http://redditcryptobot.herokuapp.com/ - [@CryptoCurrNews](https://twitter.com/CryptoCurrNews)
 
@@ -8,10 +8,10 @@ Built with:
 
 - Ruby on Rails
 
-- Reddit Api
+- Reddit API
 
-- Twitter Api
+- Twitter API
 
 - Rufus-Scheduler
 
-- Deployed on Heroku
+- Heroku

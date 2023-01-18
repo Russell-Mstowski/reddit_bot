@@ -22,7 +22,7 @@ scheduler.every '1h' do
 
   newest_post = posts.shuffle.first["data"]
 
-  tweet = "[NEW] #{newest_post["title"]} + [cont.] #{newest_post["url"]} #bitcoin #btc #cryptocurrency #crypto #blockchain #eth"
+  tweet = "[NEW] #{newest_post["title"]} + #{newest_post["url"]} #bitcoin #btc #cryptocurrency #crypto #blockchain #eth"
 
   if newest_post["id"] != last_post["id"]
     client.update(tweet)

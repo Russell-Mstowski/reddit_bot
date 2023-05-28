@@ -8,8 +8,8 @@ class TweetController < ApplicationController
   def tweet
     consumer_key        = ENV['API_KEY']
     consumer_secret     = ENV['API_SEC']
-    acc_token        = ENV['ACC_TOK']
-    acc_token_secret = ENV['ACC_TOK_SEC']
+    acc_token           = ENV['ACC_TOK']
+    acc_token_secret    = ENV['ACC_TOK_SEC']
     
     # Create tweet URL
     create_tweet_url = "https://api.twitter.com/2/tweets"

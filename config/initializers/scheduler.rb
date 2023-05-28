@@ -1,13 +1,14 @@
 require 'unirest'
-require 'twitter'
 require 'rufus-scheduler'
+require 'json'
+require 'typhoeus'
+require 'oauth'
+require 'oauth/request_proxy/typhoeus_request'
 
-client = Twitter::REST::Client.new do |config|
-  config.consumer_key        = ENV['API_KEY']
-  config.consumer_secret     = ENV['API_SEC']
-  config.access_token        = ENV['ACC_TOK']
-  config.access_token_secret = ENV['ACC_TOK_SEC']
-end
+consumer_key        = ENV['API_KEY']
+consumer_secret     = ENV['API_SEC']
+access_token        = ENV['ACC_TOK']
+access_token_secret = ENV['ACC_TOK_SEC']
 
 scheduler = Rufus::Scheduler.new
 refresher = Rufus::Scheduler.new
@@ -25,7 +26,28 @@ scheduler.every '1h' do
   tweet = "[NEW] #{newest_post["title"]} + #{newest_post["url"]} #bitcoin #btc #cryptocurrency #crypto #blockchain #eth"
 
   if newest_post["id"] != last_post["id"]
-    client.update(tweet)
+    @json_payload = {"text": tweet}
+
+    consumer = OAuth::Consumer.new(consumer_key, consumer_secret, :site => 'https://api.twitter.com')
+
+    options = {
+    :method => :post,
+    headers: {
+      "User-Agent": "v2CreateTweetRuby",
+      "content-type": "application/json"
+    },
+    body: JSON.dump(@json_payload)
+    }
+    create_tweet_url = "https://api.twitter.com/2/tweets"
+    request = Typhoeus::Request.new(create_tweet_url, options)
+
+    access_token = OAuth::Token.new(ACCESS_TOKEN, access_token_secret)
+    oauth_params = {:consumer => consumer, :token => access_token}
+
+    oauth_helper = OAuth::Client::Helper.new(request, oauth_params.merge(:request_uri => create_tweet_url))
+
+    request.options[:headers].merge!({"Authorization" => oauth_helper.header}) # Signs the request
+    response = request.run
   end
 
   last_post = newest_post

@@ -34,11 +34,13 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'rufus-scheduler'
 
-gem 'twitter'
+gem 'typhoeus'
 
 gem 'unirest'
 
-gem 'figaro'
+gem 'json'
+
+gem 'oauth'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

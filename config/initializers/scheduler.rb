@@ -41,7 +41,7 @@ scheduler.every '1h' do
     create_tweet_url = "https://api.twitter.com/2/tweets"
     request = Typhoeus::Request.new(create_tweet_url, options)
 
-    access_token = OAuth::Token.new(ACCESS_TOKEN, access_token_secret)
+    access_token = OAuth::Token.new(acc_token, acc_token_secret)
     oauth_params = {:consumer => consumer, :token => access_token}
 
     oauth_helper = OAuth::Client::Helper.new(request, oauth_params.merge(:request_uri => create_tweet_url))

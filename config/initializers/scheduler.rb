@@ -16,20 +16,26 @@ refresher = Rufus::Scheduler.new
 consumer = OAuth::Consumer.new(consumer_key, consumer_secret, :site => 'https://api.twitter.com')
 create_tweet_url = "https://api.twitter.com/2/tweets"
 
-last_post = {:id => ""}
-scheduler.every '1h' do
-  response = Unirest.get("https://www.reddit.com/r/CryptoCurrency/hot/.json")
-
-  posts = response.body["data"]["children"]
+def get_new_post()
+  posts = Unirest.get("https://www.reddit.com/r/CryptoCurrency/hot/.json").body["data"]["children"]
 
   posts.delete_if { |post| post["data"]["title"].include? 'Daily Discussion' }
 
-  newest_post = posts.shuffle.first["data"]
+  new_post = posts.shuffle.first["data"]
 
-  tweet = "[NEW] #{newest_post["title"]} + #{newest_post["url"]} #bitcoin #btc #cryptocurrency #crypto #blockchain #eth"
+  return new_post
+end
 
-  if newest_post["id"] != last_post["id"]
-    @json_payload = {"text": tweet}
+def format_tweet(new_post)
+  "[NEW] #{new_post["title"]} + #{new_post["url"]} #bitcoin #btc #cryptocurrency #crypto #blockchain #eth"
+end
+
+last_post = {:id => ""}
+scheduler.every '5m' do
+  new_post = get_new_post()
+
+  if new_post["id"] != last_post["id"]
+    @json_payload = {"text": format_tweet(new_post)}
 
     options = {
       :method => :post,
@@ -51,7 +57,7 @@ scheduler.every '1h' do
     response = request.run
   end
 
-  last_post = newest_post
+  last_post = new_post
 end
 
 refresher.every '25m' do

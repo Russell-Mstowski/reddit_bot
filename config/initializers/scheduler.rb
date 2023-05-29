@@ -14,15 +14,6 @@ scheduler = Rufus::Scheduler.new
 refresher = Rufus::Scheduler.new
 
 consumer = OAuth::Consumer.new(consumer_key, consumer_secret, :site => 'https://api.twitter.com')
-
-options = {
-  :method => :post,
-  headers: {
-    "User-Agent": "v2CreateTweetRuby",
-    "content-type": "application/json"
-  },
-  body: JSON.dump(@json_payload)
-}
 create_tweet_url = "https://api.twitter.com/2/tweets"
 
 last_post = {:id => ""}
@@ -39,6 +30,15 @@ scheduler.every '1h' do
 
   if newest_post["id"] != last_post["id"]
     @json_payload = {"text": tweet}
+
+    options = {
+      :method => :post,
+      headers: {
+        "User-Agent": "v2CreateTweetRuby",
+        "content-type": "application/json"
+      },
+      body: JSON.dump(@json_payload)
+    }
     
     request = Typhoeus::Request.new(create_tweet_url, options)
 

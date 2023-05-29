@@ -31,11 +31,12 @@ def format_tweet(new_post)
 end
 
 last_post = {:id => ""}
-scheduler.every '5m' do
+scheduler.every '1h' do
   new_post = get_new_post()
 
   if new_post["id"] != last_post["id"]
     @json_payload = {"text": format_tweet(new_post)}
+    puts @json_payload
 
     options = {
       :method => :post,
@@ -55,6 +56,7 @@ scheduler.every '5m' do
 
     request.options[:headers].merge!({"Authorization" => oauth_helper.header}) # Signs the request
     response = request.run
+    puts "I should have tweeted!!"
   end
 
   last_post = new_post

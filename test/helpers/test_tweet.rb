@@ -9,8 +9,8 @@ require 'oauth/request_proxy/typhoeus_request'
 # export CONSUMER_KEY='YOUR-KEY', CONSUMER_SECRET='YOUR-SECRET'
 consumer_key        = ENV['API_KEY']
 consumer_secret     = ENV['API_SEC']
-access_token        = ENV['ACC_TOK']
-access_token_secret = ENV['ACC_TOK_SEC']
+acc_token        = ENV['ACC_TOK']
+acc_token_secret = ENV['ACC_TOK_SEC']
 
 # Create tweet URL
 create_tweet_url = "https://api.twitter.com/2/tweets"
@@ -31,6 +31,7 @@ tweet = "[NEW] #{newest_post["title"]} + #{newest_post["url"]} #bitcoin #btc #cr
 @json_payload = {"text": tweet}
 
 consumer = OAuth::Consumer.new(consumer_key, consumer_secret, :site => 'https://api.twitter.com')
+create_tweet_url = "https://api.twitter.com/2/tweets"
 
 options = {
   :method => :post,
@@ -40,10 +41,9 @@ options = {
   },
   body: JSON.dump(@json_payload)
 }
-create_tweet_url = "https://api.twitter.com/2/tweets"
 request = Typhoeus::Request.new(create_tweet_url, options)
 
-access_token = OAuth::Token.new(token, token_secret)
+access_token = OAuth::Token.new(acc_token, acc_token_secret)
 oauth_params = {:consumer => consumer, :token => access_token}
 
 oauth_helper = OAuth::Client::Helper.new(request, oauth_params.merge(:request_uri => create_tweet_url))

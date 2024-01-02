@@ -17,15 +17,13 @@ consumer = OAuth::Consumer.new(consumer_key, consumer_secret, :site => 'https://
 create_tweet_url = "https://api.twitter.com/2/tweets"
 
 def get_new_post()
-  response = Unirest.get("https://www.reddit.com/r/CryptoCurrency/hot/.json")
+  response = Unirest.get("https://old.reddit.com/r/CryptoCurrency/hot/.json")
 
   posts = response.body["data"]["children"]
 
   posts.delete_if { |post| post["data"]["title"].include? 'Daily Discussion' }
 
-  new_post = posts.shuffle.first["data"]
-
-  new_post
+  posts.shuffle.first["data"]
 end
 
 def format_tweet(new_post)

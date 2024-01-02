@@ -15,7 +15,7 @@ class TweetController < ApplicationController
     create_tweet_url = "https://api.twitter.com/2/tweets"
 
     # Pull Reddit posts
-    response = Unirest.get("https://www.reddit.com/r/CryptoCurrency/hot/.json")
+    response = Unirest.get("https://old.reddit.com/r/CryptoCurrency/hot/.json")
 
     puts "*******Response********"
     puts response.inspect

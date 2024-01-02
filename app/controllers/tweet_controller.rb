@@ -17,7 +17,13 @@ class TweetController < ApplicationController
     # Pull Reddit posts
     response = Unirest.get("https://www.reddit.com/r/CryptoCurrency/hot/.json")
 
+    puts "*******Response********"
+    puts response.inspect
+
     posts = response.body["data"]["children"]
+
+    puts "*******Posts********"
+    puts posts.inspect
 
     posts.delete_if { |post| post["data"]["title"].include? 'Daily Discussion' }
 
